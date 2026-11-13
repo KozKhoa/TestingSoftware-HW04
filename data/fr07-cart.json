@@ -1,0 +1,168 @@
+[
+  {
+    "tcId": "TC-B01",
+    "category": "edge",
+    "description": "Empty cart displays empty message, illustration, and continue shopping link",
+    "itemsToAdd": [],
+    "action": "check_empty_state",
+    "expected": {
+      "emptyHeading": "Giỏ hàng của bạn đang trống",
+      "requireIllustration": true,
+      "continueLabel": "Tiếp tục mua sắm"
+    },
+    "reqRef": "FR-07;FR-24"
+  },
+  {
+    "tcId": "TC-B02",
+    "category": "positive",
+    "description": "Add 1 product and verify 5 required columns and +/- quantity controls",
+    "itemsToAdd": ["iPhone 15 Pro Max"],
+    "action": "check_table_structure",
+    "expected": {
+      "columns": ["Sản phẩm", "Đơn giá", "Số lượng", "Thành tiền", "Thao tác"],
+      "rowCount": 1,
+      "requireQuantityButtons": true
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B03",
+    "category": "positive",
+    "description": "Adding the same product twice increments quantity instead of creating duplicate row",
+    "itemsToAdd": ["iPhone 15 Pro Max", "iPhone 15 Pro Max"],
+    "action": "check_duplicate_merge",
+    "expected": {
+      "rowCount": 1,
+      "quantityText": "2",
+      "subtotalPattern": "60[.,]000[.,]000"
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B04",
+    "category": "positive",
+    "description": "Increase product quantity with + button in cart",
+    "itemsToAdd": ["Bàn phím cơ Keychron Q1"],
+    "action": "increment_quantity",
+    "expected": {
+      "quantityText": "2",
+      "subtotalPattern": "8[.,]000[.,]000"
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B05",
+    "category": "positive",
+    "description": "Decrease product quantity with - button when quantity > 1",
+    "itemsToAdd": ["Bàn phím cơ Keychron Q1", "Bàn phím cơ Keychron Q1"],
+    "action": "decrement_quantity",
+    "expected": {
+      "quantityText": "1",
+      "subtotalPattern": "4[.,]000[.,]000"
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B06",
+    "category": "edge",
+    "description": "Quantity at lower boundary (1) prevents decrement below 1",
+    "itemsToAdd": ["Bàn phím cơ Keychron Q1"],
+    "action": "decrement_at_min",
+    "expected": {
+      "minQuantityProtected": true
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B07",
+    "category": "positive",
+    "description": "Clicking Remove opens confirmation dialog before deleting item",
+    "itemsToAdd": ["Tai nghe AirPods Pro 2"],
+    "action": "delete_check_dialog",
+    "expected": {
+      "requireConfirmDialog": true
+    },
+    "reqRef": "FR-07;FR-24"
+  },
+  {
+    "tcId": "TC-B08",
+    "category": "positive",
+    "description": "Confirming item deletion removes item and updates cart to empty state",
+    "itemsToAdd": ["Tai nghe AirPods Pro 2"],
+    "action": "delete_and_confirm",
+    "expected": {
+      "emptyHeading": "Giỏ hàng của bạn đang trống"
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B09",
+    "category": "negative",
+    "description": "Canceling deletion dialog preserves item in cart",
+    "itemsToAdd": ["Tai nghe AirPods Pro 2"],
+    "action": "delete_and_cancel",
+    "expected": {
+      "requireConfirmDialog": true,
+      "rowCountAfterCancel": 1
+    },
+    "reqRef": "FR-07;FR-24"
+  },
+  {
+    "tcId": "TC-B10",
+    "category": "positive",
+    "description": "Cart total label must strictly display 'Tổng cộng' instead of 'Tổng tạm tính'",
+    "itemsToAdd": ["Bàn phím cơ Keychron Q1"],
+    "action": "check_total_label",
+    "expected": {
+      "exactLabel": "Tổng cộng",
+      "forbiddenLabel": "Tổng tạm tính"
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B11",
+    "category": "positive",
+    "description": "Cart total accurately sums multiple distinct products",
+    "itemsToAdd": ["iPhone 15 Pro Max", "Bàn phím cơ Keychron Q1"],
+    "action": "check_multi_item_total",
+    "expected": {
+      "rowCount": 2,
+      "totalPattern": "34[.,]000[.,]000\\s*₫"
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B12",
+    "category": "positive",
+    "description": "Continue shopping button displays 'Tiếp tục mua sắm' and navigates home",
+    "itemsToAdd": ["Bàn phím cơ Keychron Q1"],
+    "action": "check_continue_button",
+    "expected": {
+      "buttonLabel": "Tiếp tục mua sắm",
+      "targetPath": "/"
+    },
+    "reqRef": "FR-07"
+  },
+  {
+    "tcId": "TC-B13",
+    "category": "positive",
+    "description": "Navbar cart link displays quantity badge matching total items added",
+    "itemsToAdd": ["iPhone 15 Pro Max", "Tai nghe AirPods Pro 2", "Bàn phím cơ Keychron Q1"],
+    "action": "check_navbar_badge",
+    "expected": {
+      "badgeCount": "3"
+    },
+    "reqRef": "FR-23"
+  },
+  {
+    "tcId": "TC-B14",
+    "category": "positive",
+    "description": "Cart page renders navigation breadcrumb",
+    "itemsToAdd": ["Bàn phím cơ Keychron Q1"],
+    "action": "check_breadcrumb",
+    "expected": {
+      "breadcrumbText": "Giỏ hàng"
+    },
+    "reqRef": "FR-23"
+  }
+]
