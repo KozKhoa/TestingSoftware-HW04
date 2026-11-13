@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import type { TestInfo } from '@playwright/test';
 import { parse } from 'csv-parse/sync';
 
 /**
@@ -40,4 +41,23 @@ export function resolveDataValue(
     ch.repeat(Number(countStr)),
   );
   return resolved;
+}
+
+/**
+ * Attach Student ID, ISO-8601 timestamp, category, and requirement reference metadata
+ * to Playwright test info so traceability appears directly inside HTML/JSON reports.
+ */
+export function annotateTestCase(
+  testInfo: TestInfo,
+  tc: { tcId: string; category: string; reqRef: string },
+): void {
+  const studentId = process.env.STUDENT_ID || '23120285';
+  const runTimestamp = process.env.RUN_TIMESTAMP || new Date().toISOString();
+  testInfo.annotations.push(
+    { type: 'tcId', description: tc.tcId },
+    { type: 'category', description: tc.category },
+    { type: 'reqRef', description: tc.reqRef },
+    { type: 'runBy', description: `Run by: ${studentId}` },
+    { type: 'timestamp', description: runTimestamp },
+  );
 }

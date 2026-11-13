@@ -1,5 +1,5 @@
 import { test, expect, Locator, Page } from '@playwright/test';
-import { loadCsvCases, resolveDataValue } from './helpers/data-loader';
+import { annotateTestCase, loadCsvCases, resolveDataValue } from './helpers/data-loader';
 
 interface RegisterCase {
   tcId: string;
@@ -27,6 +27,7 @@ function fieldInput(page: Page, labelText: string): Locator {
 test.describe('FR-01: Account Registration (Domain, BVA & UI Compliance)', () => {
   for (const tc of registerCases) {
     test(`${tc.tcId} [${tc.category}] ${tc.description}`, async ({ page }, testInfo) => {
+      annotateTestCase(testInfo, tc);
       await page.goto('/register');
 
       const nameInput = fieldInput(page, 'Họ Tên');

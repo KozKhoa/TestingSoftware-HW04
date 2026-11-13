@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
-import { loadJsonCases } from './helpers/data-loader';
+import { annotateTestCase, loadJsonCases } from './helpers/data-loader';
 
 interface CartCase {
   tcId: string;
@@ -33,7 +33,8 @@ async function seedCartAndNavigate(page: Page, itemsToAdd: string[]) {
 
 test.describe('FR-07: Shopping Cart (Human-Reviewed Data-Driven)', () => {
   for (const tc of cartCases) {
-    test(`${tc.tcId} [${tc.category}] ${tc.description}`, async ({ page }) => {
+    test(`${tc.tcId} [${tc.category}] ${tc.description}`, async ({ page }, testInfo) => {
+      annotateTestCase(testInfo, tc);
       if (tc.action === 'check_navbar_badge') {
         await page.goto('/');
         await expect(page.getByRole('button', { name: 'Thêm vào giỏ' }).first()).toBeVisible();

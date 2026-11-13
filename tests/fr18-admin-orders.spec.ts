@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
-import { loadJsonCases, resolveDataValue } from './helpers/data-loader';
+import { annotateTestCase, loadJsonCases, resolveDataValue } from './helpers/data-loader';
 import { seedOrderWithStatus } from './helpers/eshop-api';
 
 interface AdminOrderCase {
@@ -37,6 +37,7 @@ async function loginAsAdminAndOpenOrders(page: Page) {
 test.describe('FR-18: Admin Order Management & FR-10 State Machine (Human-Reviewed)', () => {
   for (const tc of orderCases) {
     test(`${tc.tcId} [${tc.category}] ${tc.description}`, async ({ page, request }, testInfo) => {
+      annotateTestCase(testInfo, tc);
       if (tc.action === 'non_admin_ui_login') {
         await page.goto(ADMIN_URL);
         await page.getByPlaceholder('Email').fill('test@eshop.com');

@@ -5,6 +5,7 @@ const runTimestamp = process.env.RUN_TIMESTAMP || new Date().toISOString();
 const reportDir = process.env.REPORT_DIR || 'reports/all-browsers';
 const featureTag = process.env.REPORT_FEATURE || 'All Features (FR-01, FR-07, FR-18)';
 const browserTag = process.env.REPORT_BROWSER || 'All Browsers (Chromium, Firefox, WebKit)';
+const jsonReportFile = process.env.JSON_REPORT_FILE;
 const webkitWsEndpoint = process.env.WEBKIT_WS_ENDPOINT;
 
 export default defineConfig({
@@ -34,6 +35,7 @@ export default defineConfig({
         title: `HW04 Automation Report — Run by: ${studentId} (${runTimestamp})`,
       },
     ],
+    ...(jsonReportFile ? [['json', { outputFile: jsonReportFile }] as const] : []),
   ],
   use: {
     baseURL: process.env.WEB_BASE_URL || 'http://localhost:5173',
