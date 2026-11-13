@@ -38,18 +38,17 @@ test.describe('FR-18: Admin Order Management & FR-10 State Machine (Human-Review
   for (const tc of orderCases) {
     test(`${tc.tcId} [${tc.category}] ${tc.description}`, async ({ page, request }, testInfo) => {
       if (tc.action === 'non_admin_ui_login') {
-        let dialogMsg = '';
-        page.once('dialog', async (d) => {
-          dialogMsg = d.message();
-          await d.accept();
-        });
         await page.goto(ADMIN_URL);
         await page.getByPlaceholder('Email').fill('test@eshop.com');
         await page.getByPlaceholder('Password').fill('Test1234!');
+        const dialogPromise = page.waitForEvent('dialog');
         await page.getByRole('button', { name: 'Login' }).click();
+        const dialog = await dialogPromise;
+        const dialogMsg = dialog.message();
+        await dialog.accept();
         await expect(page.getByRole('heading', { name: 'Admin Login' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'EShop Admin' })).toHaveCount(0);
-        expect(dialogMsg).toContain('admin');
+        expect(dialogMsg.toLowerCase()).toContain('admin');
         return;
       }
 

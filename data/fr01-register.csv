@@ -8,7 +8,7 @@ TC-A06,negative,Password below boundary 7 chars,Nguyen Van A,user_fail01_{{UNIQU
 TC-A07,negative,Password empty 0 chars,Nguyen Van A,user_fail02_{{UNIQUE}}@eshop.com,,,html5_required,password,FR-01;FR-22
 TC-A08,negative,Password missing lowercase letter,Nguyen Van A,user_fail03_{{UNIQUE}}@eshop.com,PASS@1234,PASS@1234,error_message,chữ thường,FR-01
 TC-A09,negative,Password missing uppercase letter,Nguyen Van A,user_fail04_{{UNIQUE}}@eshop.com,pass@1234,pass@1234,error_message,chữ hoa,FR-01
-TC-A10,negative,Password missing digit,Nguyen Van A,user_fail05_{{UNIQUE}}@eshop.com,Password@!,Password@!,error_message,chữ số,FR-01
+TC-A10,negative,Password missing digit,Nguyen Van A,user_fail05_{{UNIQUE}}@eshop.com,Password@!,Password@!,error_message,chữ số|số,FR-01
 TC-A11,negative,Password missing special character,Nguyen Van A,user_fail06_{{UNIQUE}}@eshop.com,Password123,Password123,error_message,ký tự đặc biệt,FR-01
 TC-A12,negative,Password with disallowed special char #,Nguyen Van A,user_fail07_{{UNIQUE}}@eshop.com,Password#123,Password#123,error_message,ký tự,FR-01
 TC-A13,negative,Name empty 0 chars,,user_fail08_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,html5_required,name,FR-01;FR-22
