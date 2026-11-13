@@ -1,13 +1,25 @@
 tcId,category,description,name,email,password,confirmPassword,expectedOutcome,expectedText,reqRef
-TC-A01,positive,Happy path valid registration,Nguyen Van A,valid_user01@eshop.com,ValidP@ss123,ValidP@ss123,redirect_login,/login,FR-01
-TC-A02,edge,Password at lower boundary 8 chars,Tran Thi B,valid_user02@eshop.com,Pass@123,Pass@123,redirect_login,/login,FR-01
-TC-A03,edge,Password at LB+1 9 chars,Le Van C,valid_user03@eshop.com,Pass@1234,Pass@1234,redirect_login,/login,FR-01
-TC-A04,edge,Name at lower boundary 1 char,A,valid_user04@eshop.com,ValidP@ss1,ValidP@ss1,redirect_login,/login,FR-01
-TC-A06,negative,Password below boundary 7 chars,Nguyen Van A,user_fail01@eshop.com,Pass@12,Pass@12,error_message,8 ký tự,FR-01
-TC-A08,negative,Password missing lowercase letter,Nguyen Van A,user_fail03@eshop.com,PASS@1234,PASS@1234,error_message,chữ thường,FR-01
-TC-A09,negative,Password missing uppercase letter,Nguyen Van A,user_fail04@eshop.com,pass@1234,pass@1234,error_message,chữ hoa,FR-01
-TC-A10,negative,Password missing digit,Nguyen Van A,user_fail05@eshop.com,Password@!,Password@!,error_message,chữ số,FR-01
-TC-A11,negative,Password missing special character,Nguyen Van A,user_fail06@eshop.com,Password123,Password123,error_message,ký tự đặc biệt,FR-01
-TC-A17,negative,Email missing @ symbol,Nguyen Van A,usertesteshop.com,ValidP@ss1,ValidP@ss1,error_message,email,FR-01
-TC-A22,negative,Duplicate existing email,Nguyen Van A,test@eshop.com,ValidP@ss1,ValidP@ss1,error_message,tồn tại,FR-01
-TC-A23,negative,Confirm password mismatch,Nguyen Van A,user_fail11@eshop.com,ValidP@ss1,ValidP@ss2,error_message,không khớp,FR-01
+TC-A01,positive,Happy path valid registration,Nguyen Van A,valid_user01_{{UNIQUE}}@eshop.com,ValidP@ss123,ValidP@ss123,redirect_login,/login,FR-01
+TC-A02,edge,Password at lower boundary 8 chars,Tran Thi B,valid_user02_{{UNIQUE}}@eshop.com,Pass@123,Pass@123,redirect_login,/login,FR-01
+TC-A03,edge,Password at LB+1 9 chars,Le Van C,valid_user03_{{UNIQUE}}@eshop.com,Pass@1234,Pass@1234,redirect_login,/login,FR-01
+TC-A04,edge,Name at lower boundary 1 char,A,valid_user04_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,redirect_login,/login,FR-01
+TC-A05,edge,Name at upper boundary 255 chars,{{REPEAT:A:255}},valid_user05_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,redirect_login,/login,FR-01
+TC-A06,negative,Password below boundary 7 chars,Nguyen Van A,user_fail01_{{UNIQUE}}@eshop.com,Pass@12,Pass@12,error_message,8 ký tự,FR-01
+TC-A07,negative,Password empty 0 chars,Nguyen Van A,user_fail02_{{UNIQUE}}@eshop.com,,,html5_required,password,FR-01;FR-22
+TC-A08,negative,Password missing lowercase letter,Nguyen Van A,user_fail03_{{UNIQUE}}@eshop.com,PASS@1234,PASS@1234,error_message,chữ thường,FR-01
+TC-A09,negative,Password missing uppercase letter,Nguyen Van A,user_fail04_{{UNIQUE}}@eshop.com,pass@1234,pass@1234,error_message,chữ hoa,FR-01
+TC-A10,negative,Password missing digit,Nguyen Van A,user_fail05_{{UNIQUE}}@eshop.com,Password@!,Password@!,error_message,chữ số,FR-01
+TC-A11,negative,Password missing special character,Nguyen Van A,user_fail06_{{UNIQUE}}@eshop.com,Password123,Password123,error_message,ký tự đặc biệt,FR-01
+TC-A12,negative,Password with disallowed special char #,Nguyen Van A,user_fail07_{{UNIQUE}}@eshop.com,Password#123,Password#123,error_message,ký tự,FR-01
+TC-A13,negative,Name empty 0 chars, ,user_fail08_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,reject_registration,Họ Tên,FR-01;FR-22
+TC-A14,negative,Name whitespace only,    ,user_fail09_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,reject_registration,Họ Tên,FR-01
+TC-A15,negative,Name exceeding 255 chars (256 chars),{{REPEAT:A:256}},user_fail10_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,reject_registration,255,FR-01
+TC-A16,negative,Email empty 0 chars,Nguyen Van A,,ValidP@ss1,ValidP@ss1,html5_required,email,FR-01;FR-22
+TC-A17,negative,Email missing @ symbol,Nguyen Van A,usertesteshop.com,ValidP@ss1,ValidP@ss1,reject_email,email,FR-01
+TC-A18,negative,Email missing domain after @,Nguyen Van A,usertest@,ValidP@ss1,ValidP@ss1,reject_email,email,FR-01
+TC-A19,negative,Email missing local-part before @,Nguyen Van A,@eshop.com,ValidP@ss1,ValidP@ss1,reject_email,email,FR-01
+TC-A20,negative,Email missing TLD extension,Nguyen Van A,usertest@eshop,ValidP@ss1,ValidP@ss1,reject_email,email,FR-01
+TC-A21,negative,Email containing whitespace,Nguyen Van A,user test@eshop.com,ValidP@ss1,ValidP@ss1,reject_email,email,FR-01
+TC-A22,negative,Duplicate existing email test@eshop.com,Nguyen Van A,test@eshop.com,ValidP@ss1,ValidP@ss1,reject_duplicate,tồn tại,FR-01
+TC-A23,negative,Confirm password mismatch,Nguyen Van A,user_fail11_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss2,confirm_password_reject,khớp,FR-01
+TC-A24,negative,Confirm password empty,Nguyen Van A,user_fail12_{{UNIQUE}}@eshop.com,ValidP@ss1,,confirm_password_required,Xác nhận mật khẩu,FR-01
