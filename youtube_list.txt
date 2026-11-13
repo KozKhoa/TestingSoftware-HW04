@@ -1,0 +1,5 @@
+[Task 2 Demo Video (>= 5 min, Vietnamese narration, Multi-Browser Playwright + Review Fix)]
+[LINK_PENDING] - Record using Section 1 of docs/video_scripts.md and paste YouTube Unlisted URL here.
+
+[Section 7 Agent Skill End-to-End Demo (playwright-ddt-multibrowser)]
+[LINK_PENDING] - Record using Section 2 of docs/video_scripts.md and paste YouTube Unlisted URL here.

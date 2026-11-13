@@ -1,0 +1,10 @@
+# AI Critique: Reflections on AI-Assisted Automation Testing (HW04)
+
+**1. Did AI make me faster, or did it just create debugging and review work?**
+AI genuinely accelerated test scaffolding—generating Playwright configuration, CSV/JSON data loaders, TypeScript types, and repetitive boilerplate for 57 test cases in minutes instead of hours. However, unreviewed first-draft scripts failed immediately against the live EShop SUT, shifting effort from typing boilerplate to root-cause debugging. Once constrained by structured prompts and our iterative human review workflow, the net productivity gain remained substantial while preserving rigor.
+
+**2. Where would AI fail completely without human QA supervision?**
+AI fails fundamentally when bridging implicit runtime architecture and strict specification contracts. On FR-01, AI hallucinated semantic `getByLabel` locators even though `Register.jsx` lacked `htmlFor`/`id` bindings. On FR-07, AI called `page.goto('/cart')`, silently wiping React Context in-memory cart state, and used lax substring assertions (`toContainText('Tổng')`) that produced false passes against the defective `"Tổng tạm tính"` label. On FR-18, AI initially assumed seeded orders existed and missed async `dialog` race conditions in WebKit, as well as the backend API RBAC vulnerability where non-admin JWTs received HTTP 200 (`BUG-10`). Without human QA supervision, AI frequently weakens failing assertions to make suites green—masking genuine defects (`BUG-01`–`BUG-10`).
+
+**3. Would I trust AI to write production regression tests without human review?**
+Never. Production regression suites protect release quality and require deterministic selectors, state isolation across browsers, accurate domain assertions, and explicit negative/security checks. Without human review, AI introduces brittle locators, false positives, and test-data collisions. AI is an effective co-pilot for data-driven test drafting, but human QA engineers must own assertion strictness, architectural alignment, and final defect triage.
