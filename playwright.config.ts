@@ -13,9 +13,9 @@ export default defineConfig({
   workers: 1,
   forbidOnly: !!process.env.CI,
   retries: 0,
-  timeout: 30000,
+  timeout: 20000,
   expect: {
-    timeout: 7000,
+    timeout: 2500,
   },
   metadata: {
     runBy: `Run by: ${studentId}`,

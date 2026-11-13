@@ -11,8 +11,8 @@ TC-A09,negative,Password missing uppercase letter,Nguyen Van A,user_fail04_{{UNI
 TC-A10,negative,Password missing digit,Nguyen Van A,user_fail05_{{UNIQUE}}@eshop.com,Password@!,Password@!,error_message,chữ số,FR-01
 TC-A11,negative,Password missing special character,Nguyen Van A,user_fail06_{{UNIQUE}}@eshop.com,Password123,Password123,error_message,ký tự đặc biệt,FR-01
 TC-A12,negative,Password with disallowed special char #,Nguyen Van A,user_fail07_{{UNIQUE}}@eshop.com,Password#123,Password#123,error_message,ký tự,FR-01
-TC-A13,negative,Name empty 0 chars, ,user_fail08_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,reject_registration,Họ Tên,FR-01;FR-22
-TC-A14,negative,Name whitespace only,    ,user_fail09_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,reject_registration,Họ Tên,FR-01
+TC-A13,negative,Name empty 0 chars,,user_fail08_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,html5_required,name,FR-01;FR-22
+TC-A14,negative,Name whitespace only,    ,user_fail09_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,reject_registration,Họ Tên|trống,FR-01
 TC-A15,negative,Name exceeding 255 chars (256 chars),{{REPEAT:A:256}},user_fail10_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss1,reject_registration,255,FR-01
 TC-A16,negative,Email empty 0 chars,Nguyen Van A,,ValidP@ss1,ValidP@ss1,html5_required,email,FR-01;FR-22
 TC-A17,negative,Email missing @ symbol,Nguyen Van A,usertesteshop.com,ValidP@ss1,ValidP@ss1,reject_email,email,FR-01
@@ -22,4 +22,9 @@ TC-A20,negative,Email missing TLD extension,Nguyen Van A,usertest@eshop,ValidP@s
 TC-A21,negative,Email containing whitespace,Nguyen Van A,user test@eshop.com,ValidP@ss1,ValidP@ss1,reject_email,email,FR-01
 TC-A22,negative,Duplicate existing email test@eshop.com,Nguyen Van A,test@eshop.com,ValidP@ss1,ValidP@ss1,reject_duplicate,tồn tại,FR-01
 TC-A23,negative,Confirm password mismatch,Nguyen Van A,user_fail11_{{UNIQUE}}@eshop.com,ValidP@ss1,ValidP@ss2,confirm_password_reject,khớp,FR-01
-TC-A24,negative,Confirm password empty,Nguyen Van A,user_fail12_{{UNIQUE}}@eshop.com,ValidP@ss1,,confirm_password_required,Xác nhận mật khẩu,FR-01
+TC-A24,negative,Confirm password empty,Nguyen Van A,user_fail12_{{UNIQUE}}@eshop.com,ValidP@ss1,,confirm_password_required,Xác nhận,FR-01
+TC-A25,ui,Mandatory field labels must contain * indicator,,,, ,ui_required_asterisk,*,FR-22
+TC-A26,ui,Email input must have HTML attribute type=email,,,,,ui_email_type,email,FR-22
+TC-A27,ui,Password and confirm password inputs must have type=password,,,,,ui_password_type,password,FR-22
+TC-A28,ui,Register submit button must use blue brand styling (bg-blue-*),,,,,ui_button_color,bg-blue-,FR-21
+TC-A29,ui,Error banner must appear above the Register submit button,Nguyen Van A,valid_ui_{{UNIQUE}}@eshop.com,short,short,ui_error_above_button,above,FR-22
