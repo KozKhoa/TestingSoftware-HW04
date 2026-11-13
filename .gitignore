@@ -1,0 +1,11 @@
+node_modules/
+eshop-sut
+eshop-sut/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+.playwright-tmp/

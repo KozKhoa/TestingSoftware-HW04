@@ -1,0 +1,27 @@
+{
+  "name": "testing-software-hw04-automation",
+  "version": "1.0.0",
+  "description": "HW04 - Data-Driven Multi-Browser Automation Testing with Playwright on EShop SUT",
+  "scripts": {
+    "test": "playwright test",
+    "test:report": "playwright show-report reports/all-browsers",
+    "test:matrix": "node scripts/run-matrix.mjs",
+    "sut:start": "bash scripts/start_sut.sh",
+    "sut:stop": "bash scripts/stop_sut.sh"
+  },
+  "keywords": [
+    "playwright",
+    "automation-testing",
+    "data-driven",
+    "cross-browser",
+    "eshop"
+  ],
+  "author": "Huynh Dang Khoa (23120285)",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.10.1",
+    "csv-parse": "^5.6.0",
+    "typescript": "^5.7.2"
+  }
+}
