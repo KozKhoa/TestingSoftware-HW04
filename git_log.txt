@@ -1,4 +1,80 @@
-commit 9c2520f4d6959c186057232ba27c73d4b0b01a97 (HEAD -> main)
+commit 5faa52eddb5850823cc92b740383e5c2f23c1b98 (HEAD -> main)
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 12:02:12 2026 +0700
+
+    docs(docs): add repo, issues, and demo video links across docs and export pdfs
+
+ AI_CRITIQUE.pdf       | Bin 36944 -> 36944 bytes
+ AI_LOG.md             | 100 +++++++++++---------------------------------------
+ README.md             |  11 +++---
+ README.pdf            | Bin 89232 -> 91688 bytes
+ docs/bug_report.md    |   1 +
+ docs/bug_report.pdf   | Bin 616668 -> 620278 bytes
+ docs/video_scripts.md |  66 ++++++++++++++++++++++++++++-----
+ report.md             |  12 +++++-
+ report.pdf            | Bin 151325 -> 158980 bytes
+ youtube_list.txt      |  10 ++++-
+ 10 files changed, 104 insertions(+), 96 deletions(-)
+
+commit f714d08b51c883f5c25ee08faba6bb0987de729a
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 12:02:12 2026 +0700
+
+    chore(setup): clean up temporary fr02 demo artifacts after video 2
+
+ data/fr02-login.json       | 218 ---------------------------------------------
+ scripts/run-matrix.mjs     |  71 +++++----------
+ tests/fr02-login.spec.ts   | 213 -------------------------------------------
+ tests/helpers/eshop-api.ts |  14 ---
+ 4 files changed, 23 insertions(+), 493 deletions(-)
+
+commit 49edbfe3bf9f14217df0dd03c99defd534a76ce8
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 11:27:21 2026 +0700
+
+    docs(docs): log ai interaction for fr02 login test suite generation
+
+ AI_LOG.md | 326 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 326 insertions(+)
+
+commit 8dea5fb02892df212aca51410dc0996121071604
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 11:23:58 2026 +0700
+
+    chore(setup): support fr02 execution and stamped html reports in matrix runner
+
+ scripts/run-matrix.mjs | 71 ++++++++++++++++++++++++++++++++++----------------
+ 1 file changed, 48 insertions(+), 23 deletions(-)
+
+commit 6df927c4ec7c882705616f9071da1eabe77a0137
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 11:23:26 2026 +0700
+
+    test(fr02): implement multi-browser data-driven login test suite
+
+ tests/fr02-login.spec.ts | 213 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 213 insertions(+)
+
+commit f4fed081bf73d1d5e5b329eb881be56f7939f2c0
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 11:22:04 2026 +0700
+
+    test(fr02): add external json test dataset and api registration helper for login
+
+ data/fr02-login.json       | 218 +++++++++++++++++++++++++++++++++++++++++++++
+ tests/helpers/eshop-api.ts |  14 +++
+ 2 files changed, 232 insertions(+)
+
+commit ca1d03c07d785e1ffa567aafd35226a6fbe0ecc5 (origin/main)
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 09:27:26 2026 +0700
+
+    docs(docs): update git_log.txt after publishing github issues
+
+ git_log.txt | 33 +++++++++++++++++++++++++++++++--
+ 1 file changed, 31 insertions(+), 2 deletions(-)
+
+commit 9c2520f4d6959c186057232ba27c73d4b0b01a97
 Author: KozKhoa <khoahuynh787898@gmail.com>
 Date:   Wed Nov 18 09:27:26 2026 +0700
 
@@ -18,7 +94,7 @@ Date:   Wed Nov 18 09:27:26 2026 +0700
  scripts/create_github_issues.py | 7 ++++++-
  1 file changed, 6 insertions(+), 1 deletion(-)
 
-commit b6a70a4789e8a89ede18fb008f8781ed27d974e5 (origin/main)
+commit b6a70a4789e8a89ede18fb008f8781ed27d974e5
 Author: KozKhoa <khoahuynh787898@gmail.com>
 Date:   Wed Nov 18 09:20:28 2026 +0700
 
