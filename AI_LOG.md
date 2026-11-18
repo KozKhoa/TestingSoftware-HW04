@@ -139,3 +139,108 @@ Added annotateTestCase(testInfo, tc) helper imported by all 3 spec files, condit
 
 - **Artifact / Scope:** `docs/bug_report.md`, `scripts/create_github_issues.py`, `scripts/fill_ai_audit_report.py`, `[AI-02] - FIT@HCMUS - AI Audit Report_Vn.docx/.pdf`, `AI_CRITIQUE.md/.pdf`, `report.md/.pdf`, `README.md`, `docs/video_scripts.md`
 - **Summary:** Synthesized verified run metrics strictly from `reports/matrix-summary.json`, copied Playwright failure screenshots into `docs/screenshots/bugs/` covering `BUG-01..BUG-10`, dry-run tested `create_github_issues.py`, populated official template `[AI-02]`, and verified word count of `AI_CRITIQUE.md` within the mandatory 200–300 word limit.
+
+---
+
+## [Entry - 2026-11-18 09:09:30] Kiểm tra tiến độ và các hạng mục còn thiếu của HW04
+
+- **Timestamp:** `2026-11-18 09:09:30`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`
+- **Description:** Đối chiếu toàn bộ cấu trúc project HW04, dữ liệu test, HTML reports (`matrix-summary.json`), git history, trạng thái GitHub repo/issues, `youtube_list.txt`, `README.md`, `docs/bug_report.md`, và môi trường chạy local với yêu cầu đề bài `2026.HW04.Automation Testing_En.md`.
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+Đọc project HW04 và kiểm tra xem tôi cần phải làm gì nữa
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Tôi đã rà soát toàn bộ project **HW04** đối chiếu với đề bài [2026.HW04.Automation Testing_En.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/2026.HW04.Automation%20Testing_En.md). Phần lớn hạ tầng test, dữ liệu, báo cáo và chứng cứ chạy thật đã hoàn thiện; dưới đây là tình trạng hiện tại và **những việc bạn cần làm tiếp để hoàn tất nộp bài**:
+
+---
+
+### 1. Những phần đã hoàn thành & kiểm chứng
+
+- **Automation Suites & External Test Data (`57` TCs, `0` hardcode):**
+  - Pool A (`FR-01`): `29` TCs trong [fr01-register.csv](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr01-register.csv) + [fr01-register.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr01-register.spec.ts).
+  - Pool B (`FR-07`): `14` TCs trong [fr07-cart.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr07-cart.json) + [fr07-cart.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr07-cart.spec.ts).
+  - Pool C (`FR-18`): `14` TCs trong [fr18-admin-orders.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr18-admin-orders.json) + [fr18-admin-orders.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr18-admin-orders.spec.ts).
+  - TypeScript typecheck (`node node_modules/typescript/bin/tsc --noEmit`) pass sạch.
+- **Multi-Browser HTML Reports (`9 + 1`):**
+  - Đủ 9 report riêng (`fr{01,07,18}-{chromium,firefox,webkit}`) + 1 report gộp (`all-browsers`) + dashboard [reports/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/index.html).
+  - Tất cả 10 `index.html` đều có banner `#hw04-run-stamp` hiển thị `Run by: 23120285` và ISO-8601 timestamp; [matrix-summary.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/matrix-summary.json) (`2026-11-13T14:48:44.739Z`) ghi nhận `69/171` pass, `102` fail (đều là bug thật của SUT), `0` flaky.
+- **Git Commit Log:** Đã có **9 commits** sửa đổi file `*.spec.ts` (đạt yêu cầu `>= 8` commits của Mục 12).
+- **Tài liệu & Agent Skill:** Đã có [report.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/report.md) (+ `.pdf`), [bug_report.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/bug_report.md) (+ `.pdf` + 11 ảnh PNG ở `docs/screenshots/bugs/`), [AI_CRITIQUE.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/AI_CRITIQUE.md) (`268` từ, đúng chuẩn `200–300` từ, + `.pdf`), [AI_LOG.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/AI_LOG.md) (+ `.pdf`), `[AI-02] - FIT@HCMUS - AI Audit Report_Vn.docx` (+ `.pdf`), và Agent Skill [SKILL.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.agents/skills/playwright-ddt-multibrowser/SKILL.md).
+
+---
+
+### 2. Những việc bạn CẦN LÀM TIẾP
+
+1. **Chuyển GitHub Repo sang Public & Tạo 10 GitHub Issues (`BUG-01..BUG-10`):**
+   - Kiểm tra `https://api.github.com/repos/KozKhoa/TestingSoftware-HW04` hiện trả về `404` (repo chưa public hoặc chưa truy cập được công khai), trong khi Mục 12 & 14 yêu cầu **public GitHub repository**.
+   - Sau khi bật **Public** cho repo `KozKhoa/TestingSoftware-HW04`, tạo file `.env` từ [.env.example](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.env.example) điền `GITHUB_TOKEN`, rồi chạy [create_github_issues.py](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/create_github_issues.py) (`python3 scripts/create_github_issues.py`) để tạo 10 issues kèm ảnh chứng cứ trên GitHub.
+
+2. **Khôi phục môi trường local (nếu chạy demo trực tiếp để quay video):**
+   - Hiện thư mục `eshop-sut/` **chưa có** trong `HW04/` (chạy [start_sut.sh](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/start_sut.sh) sẽ báo thiếu `eshop-sut`).
+   - `node_modules/.bin/` hiện **rỗng** (bị mất symlink) và `git status` đang hiển thị 754 file bị đổi file mode `100644 => 100755` (không có thay đổi nội dung).
+   - Trước khi quay demo, hãy chạy `npm install` để khôi phục `node_modules/.bin/`, clone/gắn `eshop-sut` vào `HW04/eshop-sut` (và cài dependencies cho SUT), chạy Docker WebKit server port `9321` (nếu host không phải Ubuntu 24.04), và có thể chạy `git config core.filemode false` để tránh nhiễu `git status`.
+
+3. **Quay & Upload 2 Video Unlisted lên YouTube, sau đó điền link:**
+   - Hiện cả [youtube_list.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/youtube_list.txt) và Mục 4 của [README.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/README.md) vẫn đang để `[LINK_PENDING]`:
+     - **Video Task 2 (`>= 5` phút, thuyết minh tiếng Việt):** Trình diễn script chạy end-to-end trên đa trình duyệt + mở HTML report (`Run by: 23120285` + ISO timestamp), thuyết minh tối thiểu 1 lỗi AI đã sửa khi review, và hiển thị `whoami` + `hostname` (hoặc face-cam).
+     - **Video Mục 7 (Agent Skill):** Demo end-to-end cách dùng skill `playwright-ddt-multibrowser` trên một feature hoàn chỉnh.
+   - Kịch bản gợi ý đã soạn sẵn trong [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md).
+
+4. **Cập nhật hoàn thiện `README.md`, PDF và `git_log.txt`:**
+   - Điền 2 URL YouTube Unlisted vào `youtube_list.txt` và `README.md` (có thể cập nhật thêm trạng thái/link GitHub Issues trong `docs/bug_report.md` và `README.md`).
+   - **Kiểm tra bảng Self-Assessment trong `README.md`:** Bảng ở Mục 5 của `README.md` hiện đang chia 5 nhóm weight `20% / 25% / 25% / 15% / 15%` (tổng `87%`), khác với mẫu 5 dòng ở Mục 15 của đề bài (`Task 1 - Feature A: 25`, `Task 1 - Feature B: 25`, `Task 1 - Feature C: 25`, `Task 2 — Demo video: 15`, `Agent Skills: 10`, `Total: 100`). Nên chuẩn hóa lại theo đúng khung 25/25/25/15/10 và điền điểm tự chấm cuối cùng.
+   - Chạy lại [export_pdfs.mjs](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/export_pdfs.mjs) (sau khi `npm install`) để đồng bộ các file `.pdf` (`README.pdf`, `AI_LOG.pdf`, `docs/bug_report.pdf`...) với bản `.md` mới nhất (lưu ý tôi đã ghi thêm nhật ký phiên kiểm tra này vào `AI_LOG.md` theo quy định của `AGENTS.md`).
+   - Xuất lại [git_log.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/git_log.txt) (hiện mới ghi tới `790ecc5`, chưa có `0e758f9` và các commit sắp tới của bạn) và `git push` toàn bộ lên GitHub.
+
+5. **Đóng gói file `.zip` nộp Moodle:**
+   - Hiện chưa có file nén nộp bài. Cần tạo file `23120285_HW04_AI_Automation_<SelfAssessedGrade>.zip` (ví dụ `23120285_HW04_AI_Automation_100.zip`), bao gồm đầy đủ báo cáo (`.md` + `.pdf`), `README.md`, `AI_CRITIQUE` (`.md` + `.pdf`), `AI_LOG` (`.md` + `.pdf`), `[AI-02]` (`.docx` + `.pdf`), `docs/bug_report` (`.md` + `.pdf` + screenshots), `git_log.txt`, `youtube_list.txt`, `reports/`, `tests/`, `data/`, `.agents/skills/` (loại trừ `node_modules/`, `eshop-sut/`, `.env`, `.playwright-tmp/`, `test-results/`).
+````
+
+---
+
+## [Entry - 2026-11-18 09:20:30] Tạo commit và push lên GitHub
+
+- **Timestamp:** `2026-11-18 09:20:30`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`, `Git`
+- **Description:** Tắt nhiễu `core.filemode` (753 file bị đổi quyền `100644 => 100755` không đổi nội dung), commit [AI_LOG.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/AI_LOG.md), xuất lại [git_log.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/git_log.txt), tạo commit cập nhật lịch sử Git và push lên `origin/main`.
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+Tiến hành tạo cac commit và push lên đi
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Tôi đã xử lý xong các commit và push lên `origin/main` (`git@github.com:KozKhoa/TestingSoftware-HW04.git`):
+
+1. **Loại bỏ nhiễu file mode:** Đã đặt `git config core.filemode false` để tránh commit nhầm `mode change 100644 => 100755` trên 753 file không hề thay đổi nội dung.
+2. **Tạo 2 commit theo chuẩn Conventional Commits trong `AGENTS.md`:**
+   - `docs(docs): log progress review and commit session in ai log` — lưu nhật ký các phiên kiểm tra và commit trong [AI_LOG.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/AI_LOG.md).
+   - `docs(docs): update git_log.txt with latest commit history` — xuất lại lịch sử commit đầy đủ vào [git_log.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/git_log.txt).
+3. **Push & xác nhận trạng thái:** Đã `git push origin main` thành công và kiểm tra `git status` sạch (không còn file pending).
+
+**Lưu ý nhỏ:** Hiện máy chưa cài `pandoc` nên [AI_LOG.pdf](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/AI_LOG.pdf) chưa được render lại. Sau khi bạn quay video, cập nhật link vào `youtube_list.txt` / `README.md` và cài `pandoc`, hãy chạy `node scripts/export_pdfs.mjs` để đồng bộ lại toàn bộ `.pdf`.
+````
+
+---
