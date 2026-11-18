@@ -1,4 +1,22 @@
-commit 790ecc5c32aaa6671bd8188b70b86bf57161a30d (HEAD -> main)
+commit 47bda71aabe9dd574c8d57d672bbfb7659520a58 (HEAD -> main)
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 09:20:28 2026 +0700
+
+    docs(docs): log progress review and commit session in ai log
+
+ AI_LOG.md | 105 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 105 insertions(+)
+
+commit 0e758f9d08d7ad5592889dde507903483d59fddd (origin/main)
+Author: kozkhoa <khoahuynh787898@gmail.com>
+Date:   Fri Nov 13 21:53:02 2026 +0700
+
+    docs(git): export full commit history to git_log.txt
+
+ git_log.txt | 867 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 867 insertions(+)
+
+commit 790ecc5c32aaa6671bd8188b70b86bf57161a30d
 Author: kozkhoa <khoahuynh787898@gmail.com>
 Date:   Fri Nov 13 21:53:01 2026 +0700
 
@@ -855,7 +873,7 @@ Date:   Fri Nov 13 21:23:08 2026 +0700
  tsconfig.json                                      |  13 +++
  14 files changed, 651 insertions(+), 1 deletion(-)
 
-commit ac54d94da97aa075723637df93a2377d37551719 (origin/main)
+commit ac54d94da97aa075723637df93a2377d37551719
 Author: kozkhoa <khoahuynh787898@gmail.com>
 Date:   Fri Nov 13 21:17:48 2026 +0700
 
