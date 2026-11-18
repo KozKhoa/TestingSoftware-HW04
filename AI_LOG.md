@@ -293,3 +293,329 @@ Tôi đã chuyển repository sang **Public** và tạo đầy đủ **10 GitHub
 ````
 
 ---
+
+## [Entry - 2026-11-18 09:28:50] Giải đáp về nguồn gốc, thời hạn và bảo mật của GitHub token
+
+- **Timestamp:** `2026-11-18 09:28:50`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`, `GitHub CLI (gh)`, `curl`, `grep`
+- **Description:** Kiểm tra headers xác thực từ `https://api.github.com/user` và quét toàn bộ thư mục dự án để xác minh không có GitHub token nào bị hardcode hoặc lưu trong `.env`.
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+Tôi thấy bạn mới tạo github token, cái token đó expire khi nào vậy? Hiện có đang hard code ở chỗ nào không vậy?
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Tôi **không tạo token mới**, cũng **không lưu hay hardcode** bất kỳ token nào vào mã nguồn hay ổ đĩa:
+
+1. **Nguồn gốc & cách dùng token vừa rồi:**
+   - Lệnh chạy [create_github_issues.py](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/create_github_issues.py) chỉ đọc tạm token đang đăng nhập sẵn trong **GitHub CLI keyring** của bạn (`KozKhoa`) thông qua biến môi trường trong bộ nhớ `GITHUB_TOKEN="$(gh auth token)"`.
+   - Biến môi trường đó chỉ tồn tại trong đúng một phiên lệnh đó rồi tự hủy ngay sau khi chạy xong.
+
+2. **Kiểm tra hardcode / file `.env` trong project:**
+   - Đã quét toàn bộ file trong project theo pattern `ghp_*` / `gho_*` / `github_pat_*`: chỉ có chuỗi mẫu `ghp_your_token_here` tại [.env.example](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BB%81m/Homeworks/HW04/.env.example#L2) và dòng kiểm tra placeholder tại [create_github_issues.py](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BB%81m/Homeworks/HW04/scripts/create_github_issues.py#L251).
+   - Không có token thật nào bị hardcode và cũng không có file `.env` trên đĩa.
+
+3. **Token của `gh` CLI (`gho_...`) khi nào hết hạn?**
+   - Token bạn đang đăng nhập trong `gh` là **OAuth token** của GitHub CLI (`x-oauth-client-id: 178c6fc778ccc68e1d6a`, scopes: `admin:public_key`, `gist`, `read:org`, `repo`).
+   - Đã kiểm tra response header từ `https://api.github.com/user`: GitHub **không trả về header `github-authentication-token-expiration`** — nghĩa là token này **không có thời hạn expire cố định**. Nó chỉ hết hiệu lực nếu bạn tự thu hồi (revoke) trên GitHub Settings / chạy `gh auth logout`, hoặc nếu không được dùng trong thời gian dài (GitHub tự thu hồi token OAuth không hoạt động sau 1 năm).
+````
+
+---
+
+## [Entry - 2026-11-18 09:49:10] Giải đáp vị trí các đoạn code và lỗi AI được nhắc trong `docs/video_scripts.md`
+
+- **Timestamp:** `2026-11-18 09:49:10`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`, `Git`, `grep`
+- **Description:** Đối chiếu các nội dung trong `docs/video_scripts.md` (dòng 32–40) với mã nguồn hiện tại và lịch sử commit Git để chỉ rõ vị trí từng phần.
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+@[/home/khoa/Documents/Four years/Kiểm thử phần mềm/Homeworks/HW04/docs/video_scripts.md:L32-L40]  Mấy cái này tôi không thấy tồn tại trong project vậy?
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Các nội dung ở [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md#L32-L40) **đều có thật**, nhưng được chia làm **3 nhóm vị trí khác nhau** nên khi mở các file hiện tại bạn sẽ không thấy hết cùng lúc:
+
+1. **Những đoạn code ĐÃ SỬA (đang nằm trong code hiện tại):**
+   - `header nav a[href="/cart"]` → nằm ở [fr07-cart.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr07-cart.spec.ts#L29) (và dòng 47).
+   - `'Tổng cộng'` vs `'Tổng tạm tính'` → nằm ở [fr07-cart.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr07-cart.json#L113-L118).
+   - `form div { has: label }` và `checkValidity()` → nằm ở [fr01-register.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr01-register.spec.ts#L21) và [fr01-register.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr01-register.spec.ts#L121).
+   - `page.waitForEvent('dialog')` ở `TC-C14` → nằm ở [fr18-admin-orders.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr18-admin-orders.spec.ts#L45).
+   - Stored XSS & RBAC (`PUT /api/admin/orders/:id/status`) → nằm ở [fr18-admin-orders.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr18-admin-orders.spec.ts#L65-L159) và [fr18-admin-orders.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr18-admin-orders.json#L117-L133).
+
+2. **Những đoạn code LỖI CŨ CỦA AI (chỉ còn trong Git History):**
+   - `page.goto('/cart')`, `page.getByLabel('Họ Tên')`, `page.once('dialog', ...)` là **bản AI nháp ban đầu**, đã bị ghi đè khi sửa lỗi nên không còn ở `HEAD`.
+   - Bạn có thể xem lại diff của chúng bằng các lệnh:
+     - `git show 25184e9` (xem thay đổi `FR-07`: bỏ `page.goto('/cart')`, siết `'Tổng cộng'`)
+     - `git show ae7da48` (xem thay đổi `FR-01`: bỏ `getByLabel`, thêm `form div` & `checkValidity()`)
+     - `git show 9a54e00` (xem thay đổi `FR-18`: sửa `waitForEvent('dialog')`)
+
+3. **Source code của SUT (`Register.jsx`, `CartContext.jsx`, `dangerouslySetInnerHTML`):**
+   - Các tên file này thuộc **mã nguồn ứng dụng EShop (`eshop-sut/`)** chứ không thuộc repo test `HW04`.
+   - Hiện thư mục `eshop-sut/` chưa có trong `HW04/` (bị ignore bởi `.gitignore`), nên bạn sẽ không thấy các file `.jsx` đó trong cây thư mục hiện tại cho đến khi clone/đặt `eshop-sut` vào `HW04/eshop-sut`.
+````
+
+---
+
+## [Entry - 2026-11-18 09:55:20] Bổ sung clickable links kèm số dòng vào `docs/video_scripts.md`
+
+- **Timestamp:** `2026-11-18 09:55:20`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`, `grep`
+- **Description:** Gắn link trực tiếp kèm số dòng (`#L...`) tới các file dataset (`data/*`), test spec (`tests/*`), helper (`data-loader.ts`), mã nguồn SUT (`eshop-sut/*`), Agent Skill (`.agents/skills/playwright-ddt-multibrowser/*`) và HTML reports (`reports/*`) trong [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md).
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+Trong vide_scripts bổ sung thêm các link tới file đi, tôi chỉ cần ấn vào là đi đến file và vị trí luôn, không cần phải kiếm thủ công nữa, đặc biệt là ở vị trí mà cần phài show ra, demo code hay là user thay đổi cái gì cùa  AI 
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Tôi đã bổ sung đầy đủ link trực tiếp kèm số dòng (`#L...`) vào [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md) để bạn bấm mở thẳng tới đúng vị trí khi quay video:
+
+- **Phần 2 (Data-Driven & Helpers):** link tới [fr01-register.csv](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr01-register.csv), [fr07-cart.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr07-cart.json), [fr18-admin-orders.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr18-admin-orders.json), `resolveDataValue` ([data-loader.ts#L31](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/helpers/data-loader.ts#L31)) và `annotateTestCase` ([data-loader.ts#L50](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/helpers/data-loader.ts#L50)).
+- **Phần 3 (Các lỗi AI & vị trí sửa + SUT gốc):**
+  - **FR-07:** [fr07-cart.spec.ts#L29](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr07-cart.spec.ts#L29) (`header nav a[href="/cart"]`), [fr07-cart.spec.ts#L188-L189](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr07-cart.spec.ts#L188-L189), [fr07-cart.json#L113-L118](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr07-cart.json#L113-L118), và [CartContext.jsx#L9](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/eshop-sut/frontend-web/src/context/CartContext.jsx#L9).
+  - **FR-01:** [fr01-register.spec.ts#L21](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr01-register.spec.ts#L21), [fr01-register.spec.ts#L62](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr01-register.spec.ts#L62), [fr01-register.spec.ts#L121](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr01-register.spec.ts#L121), và [Register.jsx#L15](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/eshop-sut/frontend-web/src/pages/Register.jsx#L15) / [Register.jsx#L36](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/eshop-sut/frontend-web/src/pages/Register.jsx#L36).
+  - **FR-18:** [fr18-admin-orders.spec.ts#L45](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr18-admin-orders.spec.ts#L45) (`waitForEvent('dialog')`), [fr18-admin-orders.spec.ts#L65](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr18-admin-orders.spec.ts#L65), [fr18-admin-orders.spec.ts#L159](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr18-admin-orders.spec.ts#L159), [App.jsx#L801](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/eshop-sut/frontend-admin/src/App.jsx#L801) (`dangerouslySetInnerHTML`), [server.js#L525](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/eshop-sut/backend/server.js#L525) & [server.js#L550](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/eshop-sut/backend/server.js#L550).
+- **Phần 4 & Video 2 (HTML Reports & Agent Skill):** link tới [reports/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/index.html), [reports/all-browsers/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/all-browsers/index.html), [reports/fr07-webkit/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr07-webkit/index.html), và [SKILL.md#L15-L35](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.agents/skills/playwright-ddt-multibrowser/SKILL.md#L15-L35) cùng `assertion-patterns.md` & `sample-ddt-spec.md`.
+````
+
+---
+
+## [Entry - 2026-11-18 10:00:30] Bổ sung kịch bản thuyết trình chi tiết cho Video 2 (Agent Skill Demo)
+
+- **Timestamp:** `2026-11-18 10:00:30`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`
+- **Description:** Mở rộng mục Video 2 trong [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md#L67-L106) thành 4 phần hoàn chỉnh (3–5 phút) kèm thao tác terminal/editor, link trực tiếp tới dòng code và lời thoại tiếng Việt.
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+Cho tôi kịch bản thuyết trình cho Video 2 luôn đi
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Tôi đã bổ sung kịch bản thuyết trình chi tiết cho **Video 2 (Section 7: Agent Skill End-to-End Demo)** vào [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md#L67-L106) gồm 4 phần (3–5 phút), có sẵn lệnh chạy, link nhảy thẳng tới từng dòng và lời thoại tiếng Việt:
+
+1. **Phần 1 (0:00 – 1:00):** Chạy `whoami && hostname && ls -la .agents/skills/playwright-ddt-multibrowser/` và mở [SKILL.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.agents/skills/playwright-ddt-multibrowser/SKILL.md#L1-L22) để giới thiệu mục tiêu Agent Skill.
+2. **Phần 2 (1:00 – 2:15):** Trình bày 5 Phase ([SKILL.md#L15-L21](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.agents/skills/playwright-ddt-multibrowser/SKILL.md#L15-L21)), 5 Non-Negotiable Rules ([SKILL.md#L25-L35](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.agents/skills/playwright-ddt-multibrowser/SKILL.md#L25-L35)), [assertion-patterns.md#L43-L73](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.agents/skills/playwright-ddt-multibrowser/resources/assertion-patterns.md#L43-L73) và [sample-ddt-spec.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.agents/skills/playwright-ddt-multibrowser/examples/sample-ddt-spec.md).
+3. **Phần 3 (2:15 – 3:45):** Mở [fr07-cart.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr07-cart.json), [fr07-cart.spec.ts#L1-L55](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr07-cart.spec.ts#L1-L55), [`stampHtmlReport`](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/run-matrix.mjs#L105-L120) và chạy thực tế `FR-07` trên Chromium, Firefox, WebKit (hoặc `npm run test:matrix`).
+4. **Phần 4 (3:45 – 4:30):** Mở [reports/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/index.html), [reports/fr07-webkit/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr07-webkit/index.html) và [reports/all-browsers/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/all-browsers/index.html) xác nhận tem `Run by: 23120285` + ISO-8601 timestamp.
+````
+
+---
+
+## [Entry - 2026-11-18 10:08:50] Chẩn đoán lỗi `playwright: command not found` và `Missing Playwright JSON report`
+
+- **Timestamp:** `2026-11-18 10:08:50`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`
+- **Description:** Kiểm tra `node_modules/.bin/` và giải thích nguyên nhân lỗi `sh: line 1: playwright: command not found` khi chạy `npx playwright` và `Missing Playwright JSON report` khi chạy `npm run test:matrix`.
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+Lỗi này là gì vậy? ╰─$ npm run test:matrix
+
+> testing-software-hw04-automation@1.0.0 test:matrix
+> node scripts/run-matrix.mjs
+
+ℹ Detected local Playwright WebKit server at ws://127.0.0.1:9321/
+
+▶ [fr01-chromium] Running: playwright test tests/fr01-register.spec.ts --project=chromium
+❌ Matrix execution failed: Error: Missing Playwright JSON report at /home/khoa/Documents/Four years/Kiểm thử phần mềm/Homeworks/HW04/.playwright-tmp/json/fr01-chromium.json
+    at summarizeJsonReport (file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/run-matrix.mjs:81:11)
+    at executePlaywrightRun (file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/run-matrix.mjs:164:19)
+    at main (file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/run-matrix.mjs:267:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+╭─khoa@static ~/Documents/Four years/Kiểm thử phần mềm/Homeworks/HW04 ‹main●› 
+╰─$ WEBKIT_WS_ENDPOINT=ws://127.0.0.1:9321/ npx playwright test tests/fr18-admin-orders.spec.ts --project=chromium --project=firefox --project=webkit                                    1 ↵
+
+sh: line 1: playwright: command not found
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Cả hai lỗi trên đều xuất phát từ **cùng một nguyên nhân**: thư mục `node_modules/.bin/` hiện đang **rỗng (`total 0`)** do mất các symlink khi copy/di chuyển thư mục project.
+
+1. Khi chạy `npx playwright ...`, `npx` tìm file thực thi trong `node_modules/.bin/playwright` nhưng không thấy nên báo `sh: line 1: playwright: command not found`.
+2. Khi chạy `npm run test:matrix`, [run-matrix.mjs](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/run-matrix.mjs#L164) cũng gọi `playwright test ...`, lệnh này chết ngay từ đầu nên không tạo được file JSON ở `.playwright-tmp/json/fr01-chromium.json`, dẫn tới lỗi `Missing Playwright JSON report`.
+
+**Cách sửa:** Chạy lại lệnh sau tại thư mục `HW04` để npm khôi phục toàn bộ symlink trong `node_modules/.bin/`:
+
+```bash
+npm install
+```
+
+*(Nếu bên trong `eshop-sut/backend`, `eshop-sut/frontend-web`, `eshop-sut/frontend-admin` cũng bị mất symlink `node_modules/.bin/` tương tự, bạn chạy `npm install` ở từng thư mục đó trước khi `npm run sut:start` nhé.)*
+````
+
+---
+
+## [Entry - 2026-11-18 10:24:05] Bổ sung phần chat trực tiếp với AI Agent vào kịch bản Video 2
+
+- **Timestamp:** `2026-11-18 10:24:05`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`
+- **Description:** Cập nhật Phần 3 & Phần 4 của Video 2 trong [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md#L91-L106) để bổ sung bước chat trực tiếp với AI Agent kích hoạt skill `playwright-ddt-multibrowser` end-to-end trên một feature hoàn chỉnh.
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+ủa video 2 là demo agent skill sao tôi không thấy phần demo nào chat với agent hết vậy?
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Đúng rồi, phần đó nãy còn thiếu bước **chat trực tiếp gọi Agent Skill** như yêu cầu Mục 7 của đề bài. Tôi đã cập nhật lại **Phần 3 & Phần 4** của Video 2 trong [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md#L91-L106):
+
+- **Bổ sung prompt mẫu để bạn copy-paste trực tiếp vào khung chat AI** (yêu cầu Agent dùng skill `playwright-ddt-multibrowser` tự động hóa trọn vẹn tính năng `FR-02 Đăng nhập` trên `eshop-sut/frontend-web/src/pages/Login.jsx`, hoặc demo lại trên `FR-07`).
+- **Thao tác quay màn hình rõ ràng:** quay cảnh Agent tự đọc [SKILL.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/.agents/skills/playwright-ddt-multibrowser/SKILL.md) → inspect SUT → tạo file CSV/JSON ngoài → sinh `.spec.ts` với `>= 3` assertion patterns → chạy trên Chromium, Firefox, WebKit → mở HTML report có tem `Run by: 23120285`.
+````
+
+---
+
+## [Entry - 2026-11-18 11:25:00] Triển khai Agent Skill playwright-ddt-multibrowser cho tính năng FR-02 Đăng nhập
+
+- **Timestamp:** `2026-11-18 11:25:00`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity (Gemini 3.8 Flash)`
+- **Description:** Triển khai Agent Skill `playwright-ddt-multibrowser` end-to-end cho tính năng FR-02 Đăng nhập & Khóa tài khoản (`Login.jsx`): tạo dataset ngoài `data/fr02-login.json` (18 test cases), sinh bộ test Playwright `tests/fr02-login.spec.ts` áp dụng 5 assertion patterns, rà soát Human Review phát hiện & bảo toàn nghiêm ngặt 7 lỗi SUT thực tế, nâng cấp `scripts/run-matrix.mjs` chạy matrix đa trình duyệt (Chromium, Firefox, WebKit), và xuất 4 HTML reports có đóng dấu banner `Run by: 23120285` và ISO-8601 timestamp (`reports/fr02-chromium`, `reports/fr02-firefox`, `reports/fr02-webkit`, `reports/fr02-all-browsers`).
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+Hãy dùng skill /playwright-ddt-multibrowser  để tạo bộ test Playwright Data-Driven đa trình duyệt (Chromium, Firefox, WebKit) cho tính năng FR-02 Đăng nhập (eshop-sut/frontend-web/src/pages/Login.jsx), tách dữ liệu ra file JSON/CSV ngoài, dùng tối thiểu 3 assertion patterns và xuất HTML report có đóng dấu Run by: 23120285.
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Đã áp dụng trọn vẹn quy trình 5 Phase của Agent Skill **`playwright-ddt-multibrowser`** để xây dựng bộ test Data-Driven đa trình duyệt cho tính năng **FR-02 Đăng nhập & Khóa tài khoản** (`eshop-sut/frontend-web/src/pages/Login.jsx`).
+
+---
+
+### 1. Các thành phần đã tạo và cấu hình
+
+1. **Dataset ngoài (External JSON Dataset):**
+   - File: [data/fr02-login.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr02-login.json)
+   - Chứa **18 test cases** phân nhóm: Positive (3 TCs), Negative (5 TCs), Edge & Lockout (2 TCs), UI & Security Compliance (8 TCs).
+   - Sử dụng token `{{UNIQUE}}` để cô lập dữ liệu người dùng (`login_user_{{UNIQUE}}@eshop.com`, `lockout_{{UNIQUE}}@eshop.com`) giữa các browser chạy đồng thời/tuần tự, tránh làm khóa tài khoản seed dùng chung.
+
+2. **Kịch bản kiểm thử Playwright Data-Driven:**
+   - File: [tests/fr02-login.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr02-login.spec.ts)
+   - Helper đăng ký tài khoản API: [tests/helpers/eshop-api.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/helpers/eshop-api.ts#L18-L30) (`registerViaApi`).
+
+3. **Hỗ trợ chạy Matrix & Đóng dấu HTML Report:**
+   - File: [scripts/run-matrix.mjs](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/run-matrix.mjs#L13-L17) (bổ sung flag `--feature=fr02`).
+
+---
+
+### 2. Tối thiểu 3 Assertion Patterns đã áp dụng (Thực tế áp dụng 5 patterns)
+
+1. **Navigation & URL Assertions:**
+   - `expect(page).toHaveURL(/\/(#.*)?$/)` (xác nhận chuyển hướng trang chủ `/` khi đăng nhập thành công).
+   - `expect(page).toHaveURL(/\/login$/)` (xác nhận giữ nguyên trang `/login` khi bị từ chối).
+2. **Content & Visibility Assertions:**
+   - `expect(page.locator('.bg-red-100')).toBeVisible()`.
+   - `expect(page.locator('.bg-red-100')).toContainText(/Đăng nhập thất bại/i)`.
+   - `expect(page.locator('header nav')).toBeVisible()`.
+3. **DOM Attributes, Geometry & CSS Styling Assertions:**
+   - `expect(emailInput).toHaveAttribute('type', 'email')`.
+   - `expect(passwordInput).toHaveAttribute('type', 'password')`.
+   - `expect(submitBtn).toHaveClass(/bg-blue-/)`.
+   - `expect(errBoxRect.y).toBeLessThan(btnRect.y)` (kiểm tra banner lỗi phải nằm **trên** nút bấm theo FR-22).
+4. **HTML5 Form Validation State Assertions:**
+   - `expect(await emailInput.evaluate((el: HTMLInputElement) => !el.checkValidity())).toBe(true)`.
+   - `expect(await passwordInput.evaluate((el: HTMLInputElement) => !el.checkValidity())).toBe(true)`.
+5. **Storage & Security Token Assertions:**
+   - `expect(await page.evaluate(() => localStorage.getItem('token'))).toBeTruthy()`.
+   - `expect(await page.evaluate(() => localStorage.getItem('token'))).toBeNull()`.
+
+---
+
+### 3. Quy trình Human Adversarial Review & Bảo toàn lỗi SUT (Rule 4)
+
+Trong quá trình rà soát (Phase 4):
+- **Phát hiện lỗi kịch bản ban đầu:** Test case `TC-L04` và `TC-L11` đăng ký tài khoản mới bằng API với mật khẩu sai nên khi submit bị nhận diện thành đăng nhập thành công. Đã sửa trong [data/fr02-login.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr02-login.json) trường `registeredPassword: "CorrectPassword123!"` độc lập với `password` nhập vào form.
+- **Bảo toàn nghiêm ngặt 7 lỗi SUT thực tế (Strict Defect Preservation):**
+  1. `TC-L08`: SUT dùng `type="text"` cho input email nên không chặn được định dạng thiếu `@` bằng HTML5 native validation (vi phạm FR-02 & FR-22).
+  2. `TC-L12`: Tiêu đề form đăng nhập hiển thị sai là `<h2>Đăng Ký</h2>` thay vì `<h2>Đăng nhập</h2>` (vi phạm FR-21).
+  3. `TC-L13`: Nhãn các trường bắt buộc thiếu ký hiệu `*` (vi phạm FR-22).
+  4. `TC-L14`: Input Email mang thuộc tính `type="text"` thay vì `type="email"` (vi phạm FR-02 & FR-22).
+  5. `TC-L15`: Input Mật khẩu mang thuộc tính `type="text"` làm lộ mật khẩu plaintext (vi phạm nghiêm trọng FR-22 & SEC-01).
+  6. `TC-L16`: Nút submit hiển thị nhãn tiếng Anh `"Sign In"` thay vì tiếng Việt `"Đăng nhập"` (vi phạm FR-21).
+  7. `TC-L18`: Banner thông báo lỗi hiển thị **bên dưới** nút submit thay vì phía trên (vi phạm FR-22).
+
+---
+
+### 4. Kết quả thực thi Ma trận Đa trình duyệt (Phase 5)
+
+Chạy lệnh: `node scripts/run-matrix.mjs --feature=fr02`
+
+| Browser | Số TC | Passed | Failed (Lỗi SUT) | Thời gian | HTML Report có đóng dấu |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Chromium** | 18 | 11 | 7 | 22.2s | [reports/fr02-chromium/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr02-chromium/index.html) |
+| **Firefox** | 18 | 11 | 7 | 33.1s | [reports/fr02-firefox/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr02-firefox/index.html) |
+| **WebKit** | 18 | 11 | 7 | 26.5s | [reports/fr02-webkit/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr02-webkit/index.html) |
+| **Combined (All Browsers)** | **54** | **33** | **21** | **81.7s** | [reports/fr02-all-browsers/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr02-all-browsers/index.html) |
+
+Mọi HTML report đều có banner nổi bật và tiêu đề `<title>` được đóng dấu:
+- **Run by:** `23120285`
+- **Timestamp:** Định dạng chuẩn ISO-8601 (ví dụ `2026-11-18T04:11:06.197Z`)
+- **Metadata Playwright:** ghi nhận `feature`, `browser`, `runBy` và `studentId`.
+````
+
+---
