@@ -1,4 +1,33 @@
-commit 47bda71aabe9dd574c8d57d672bbfb7659520a58 (HEAD -> main)
+commit 9c2520f4d6959c186057232ba27c73d4b0b01a97 (HEAD -> main)
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 09:27:26 2026 +0700
+
+    docs(docs): link live github issues #1..#10 in bug report, readme, and ai log
+
+ AI_LOG.md          | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
+ README.md          |  4 ++--
+ docs/bug_report.md | 24 ++++++++++++------------
+ 3 files changed, 63 insertions(+), 14 deletions(-)
+
+commit 452146808cd83ca213b03039379fb76dfc003e41
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 09:27:26 2026 +0700
+
+    fix(reports): make python-dotenv optional in github issue script
+
+ scripts/create_github_issues.py | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+commit b6a70a4789e8a89ede18fb008f8781ed27d974e5 (origin/main)
+Author: KozKhoa <khoahuynh787898@gmail.com>
+Date:   Wed Nov 18 09:20:28 2026 +0700
+
+    docs(docs): update git_log.txt with latest commit history
+
+ git_log.txt | 22 ++++++++++++++++++++--
+ 1 file changed, 20 insertions(+), 2 deletions(-)
+
+commit 47bda71aabe9dd574c8d57d672bbfb7659520a58
 Author: KozKhoa <khoahuynh787898@gmail.com>
 Date:   Wed Nov 18 09:20:28 2026 +0700
 
@@ -7,7 +36,7 @@ Date:   Wed Nov 18 09:20:28 2026 +0700
  AI_LOG.md | 105 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 105 insertions(+)
 
-commit 0e758f9d08d7ad5592889dde507903483d59fddd (origin/main)
+commit 0e758f9d08d7ad5592889dde507903483d59fddd
 Author: kozkhoa <khoahuynh787898@gmail.com>
 Date:   Fri Nov 13 21:53:02 2026 +0700
 
