@@ -10,9 +10,8 @@ const PLAYWRIGHT_BIN = path.join(ROOT_DIR, 'node_modules', '.bin', 'playwright')
 const TMP_JSON_DIR = path.join(ROOT_DIR, '.playwright-tmp', 'json');
 const REPORTS_DIR = path.join(ROOT_DIR, 'reports');
 
-const ALL_FEATURES = [
+const FEATURES = [
   { key: 'fr01', spec: 'tests/fr01-register.spec.ts', label: 'FR-01 Account Registration' },
-  { key: 'fr02', spec: 'tests/fr02-login.spec.ts', label: 'FR-02 Login and Account Lockout' },
   { key: 'fr07', spec: 'tests/fr07-cart.spec.ts', label: 'FR-07 Shopping Cart' },
   { key: 'fr18', spec: 'tests/fr18-admin-orders.spec.ts', label: 'FR-18 Admin Order Management' },
 ];
@@ -261,21 +260,8 @@ async function main() {
     console.log(`ℹ Detected local Playwright WebKit server at ${webkitWsEndpoint}`);
   }
 
-  const featureArg =
-    process.argv.find((a) => a.startsWith('--feature='))?.split('=')[1] ||
-    process.env.FEATURE ||
-    '';
-  const targetFeatures = featureArg
-    ? ALL_FEATURES.filter((f) => f.key === featureArg)
-    : ALL_FEATURES.filter((f) => ['fr01', 'fr07', 'fr18'].includes(f.key));
-
-  if (targetFeatures.length === 0) {
-    console.error(`❌ Feature '${featureArg}' not found in registered features.`);
-    process.exit(1);
-  }
-
   const individualRuns = [];
-  for (const feature of targetFeatures) {
+  for (const feature of FEATURES) {
     for (const browser of BROWSERS) {
       const runKey = `${feature.key}-${browser}`;
       const result = executePlaywrightRun({
@@ -291,44 +277,33 @@ async function main() {
     }
   }
 
-  const combinedRunKey = featureArg ? `${featureArg}-all-browsers` : 'all-browsers';
-  const combinedSpecArgs = featureArg ? [targetFeatures[0].spec] : [];
-  const combinedFeatureLabel = featureArg
-    ? `${targetFeatures[0].label} (All Browsers)`
-    : 'All Features (FR-01, FR-07, FR-18)';
-
   const combined = executePlaywrightRun({
-    runKey: combinedRunKey,
-    specArgs: combinedSpecArgs,
+    runKey: 'all-browsers',
+    specArgs: [],
     projectArgs: ['--project=chromium', '--project=firefox', '--project=webkit'],
-    featureLabel: combinedFeatureLabel,
+    featureLabel: 'All Features (FR-01, FR-07, FR-18)',
     browserLabel: 'chromium, firefox, webkit',
-    reportDir: `reports/${combinedRunKey}`,
+    reportDir: 'reports/all-browsers',
     webkitWsEndpoint,
   });
 
-  if (!featureArg) {
-    const matrixSummary = {
-      studentId: STUDENT_ID,
-      runBy: `Run by: ${STUDENT_ID}`,
-      generatedAt: new Date().toISOString(),
-      individualRuns,
-      combinedRun: combined,
-    };
+  const matrixSummary = {
+    studentId: STUDENT_ID,
+    runBy: `Run by: ${STUDENT_ID}`,
+    generatedAt: new Date().toISOString(),
+    individualRuns,
+    combinedRun: combined,
+  };
 
-    fs.writeFileSync(
-      path.join(REPORTS_DIR, 'matrix-summary.json'),
-      JSON.stringify(matrixSummary, null, 2),
-      'utf-8',
-    );
-    writeMasterReportsIndex(individualRuns, combined);
+  fs.writeFileSync(
+    path.join(REPORTS_DIR, 'matrix-summary.json'),
+    JSON.stringify(matrixSummary, null, 2),
+    'utf-8',
+  );
+  writeMasterReportsIndex(individualRuns, combined);
 
-    console.log('\n✅ Completed 9 individual runs + 1 combined multi-browser run.');
-    console.log(`📄 Summary saved to reports/matrix-summary.json & reports/index.html`);
-  } else {
-    console.log(`\n✅ Completed 3 individual browser runs + 1 combined multi-browser run for ${targetFeatures[0].label}.`);
-    console.log(`📄 Reports available under reports/${featureArg}-chromium, reports/${featureArg}-firefox, reports/${featureArg}-webkit, and reports/${combinedRunKey}`);
-  }
+  console.log('\n✅ Completed 9 individual runs + 1 combined multi-browser run.');
+  console.log(`📄 Summary saved to reports/matrix-summary.json & reports/index.html`);
 }
 
 main().catch((err) => {
