@@ -15,6 +15,20 @@ export async function loginViaApi(
   return body.token as string;
 }
 
+export async function registerViaApi(
+  request: APIRequestContext,
+  name: string,
+  email: string,
+  password: string,
+): Promise<number> {
+  const res = await request.post(`${API_URL}/register`, {
+    data: { name, email, password },
+  });
+  expect(res.status(), `Register failed for ${email}`).toBe(200);
+  const body = await res.json();
+  return body.id as number;
+}
+
 export async function seedOrderWithStatus(
   request: APIRequestContext,
   options: {
