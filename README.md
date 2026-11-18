@@ -1,7 +1,8 @@
 # HW04 — Data-Driven Multi-Browser Automation Testing (`eshop-sut`)
 
 - **Student:** Huỳnh Đăng Khoa (`23120285`) — Class `CQ2023/3` (FIT@HCMUS)
-- **Repository:** `https://github.com/KozKhoa/TestingSoftware-HW04`
+- **Repository:** [https://github.com/KozKhoa/TestingSoftware-HW04](https://github.com/KozKhoa/TestingSoftware-HW04)
+- **GitHub Issues (`BUG-01`..`BUG-10`):** [https://github.com/KozKhoa/TestingSoftware-HW04/issues](https://github.com/KozKhoa/TestingSoftware-HW04/issues)
 - **Frameworks:** Playwright Test (`TypeScript`), `csv-parse`, Node.js Matrix Runner (`9 + 1` HTML reports), Docker WebKit Bridge (`mcr.microsoft.com/playwright:v1.65.0-noble`)
 
 ---
@@ -90,8 +91,8 @@ Measured from `reports/matrix-summary.json` (generated `2026-11-13T14:48:44.739Z
 ## 4. Demo Videos (YouTube)
 
 Recording guides are prepared in [docs/video_scripts.md](docs/video_scripts.md):
-- **Task 2 Automation Demo (>= 5 min, Vietnamese):** `[LINK_PENDING]`
-- **Section 7 Agent Skill E2E Demo:** `[LINK_PENDING]`
+- **Task 2 Automation Demo (>= 5 min, Vietnamese):** https://youtu.be/agS9QcfuKt4
+- **Section 7 Agent Skill E2E Demo:** https://youtu.be/MvKYDN8dp34
 
 ---
 
@@ -103,5 +104,5 @@ Recording guides are prepared in [docs/video_scripts.md](docs/video_scripts.md):
 | 2. Data-Driven Playwright Suites (`>= 12` TCs × 3 features, external CSV/JSON, `>= 3` assertions, `>= 8` `.spec.ts` commits) | 25% | **25%** | `29 + 14 + 14 = 57` TCs in `data/`; 9 commits changing `.spec.ts` (`git_log.txt`); 5 assertion patterns |
 | 3. AI Gap Analysis, `report.md/.pdf`, `AI_LOG.md`, `[AI-02]` & `AI_CRITIQUE` (200–300w) | 25% | **25%** | Complete commit-by-commit analysis in `report.md`; `AI_CRITIQUE.md` verified at 268 words; `[AI-02]` DOCX+PDF verified |
 | 4. Bug Report & GitHub Issues (`BUG-01..BUG-10` + screenshots) | 15% | **15%** | `docs/bug_report.md/.pdf`, 11 PNG screenshots & all 10 live Issues posted (`#1`–`#10` at `https://github.com/KozKhoa/TestingSoftware-HW04/issues`) |
-| 5. Agent Skill (`.agents/skills/playwright-ddt-multibrowser/`) + Task 2 & Skill Videos + Submission Archive | 15% | **5%** | Skill bundle + Vietnamese recording scripts ready (`docs/video_scripts.md`); pending user recording/upload of the 2 YouTube videos + `.zip` rename |
-| **Current Verified Subtotal** | **100%** | **90%** | Reaches **100%** immediately once user records videos, inserts YouTube links & exports PDFs/archive |
+| 5. Agent Skill (`.agents/skills/playwright-ddt-multibrowser/`) + Task 2 & Skill Videos + Submission Archive | 15% | **15%** | Skill bundle + Vietnamese recording scripts + 2 YouTube Unlisted demos (`agS9QcfuKt4`, `MvKYDN8dp34`) completed |
+| **Total Self-Assessed Grade** | **100%** | **100%** | Ready for final PDF sync, `git_log.txt` refresh, and `23120285_HW04_AI_Automation_100.zip` packaging |

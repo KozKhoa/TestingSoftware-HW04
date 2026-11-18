@@ -2,7 +2,8 @@
 
 - **Student:** HUỲNH ĐĂNG KHOA (`23120285`) — Class `CQ2023/3` (FIT@HCMUS)
 - **System Under Test:** EShop Web (`:5173`), EShop Admin (`:5174`), EShop Backend API (`:3000`)
-- **Repository:** `https://github.com/KozKhoa/TestingSoftware-HW04`
+- **Repository:** [https://github.com/KozKhoa/TestingSoftware-HW04](https://github.com/KozKhoa/TestingSoftware-HW04)
+- **GitHub Issues (`BUG-01`..`BUG-10`):** [https://github.com/KozKhoa/TestingSoftware-HW04/issues](https://github.com/KozKhoa/TestingSoftware-HW04/issues)
 - **Framework:** Playwright Test (`@playwright/test@1.65.0`) + TypeScript + `csv-parse`
 - **Browsers Executed:** Chromium, Firefox, WebKit (Docker Playwright Ubuntu 24.04 server `ws://127.0.0.1:9321/` bridging host Fedora 44 SONAME mismatch)
 - **Verification Timestamp:** `2026-11-13T14:48:44.739Z` (`Run by: 23120285`)
@@ -87,3 +88,12 @@ All **34 per-browser failing checks** (`102` failures across 3 browsers) trace c
 - **Critical (3):** `BUG-01` (flawed password regex requiring whitespace), `BUG-09` (Admin Orders Stored XSS via `dangerouslySetInnerHTML`), `BUG-10` (missing `role === 'admin'` RBAC guard on `/api/admin/orders/*` returning HTTP `200` to regular users).
 - **Major (5):** `BUG-02` (missing Confirm Password field), `BUG-04` (name/email/duplicate error masking + plaintext DB passwords), `BUG-05` (duplicate cart rows instead of quantity merge), `BUG-06` (missing `+`/`-` buttons, unconfirmed delete, `"Giá"` column label), `BUG-08` (`canceled -> delivered` allowed transition).
 - **Minor (2):** `BUG-03` (Register UI `*`, `type="email"`, red button), `BUG-07` (`"Tổng tạm tính"`, `"← Mua tiếp"`, missing empty SVG, navbar badge, breadcrumb).
+
+---
+
+## 6. Demo Videos & Public GitHub Links
+
+- **Public GitHub Repository:** https://github.com/KozKhoa/TestingSoftware-HW04
+- **GitHub Issues (`BUG-01` – `BUG-10`, `#1` – `#10`):** https://github.com/KozKhoa/TestingSoftware-HW04/issues
+- **Task 2 Demo Video (>= 5 min, Vietnamese narration, Multi-Browser Playwright + Human Review Fix):** https://youtu.be/agS9QcfuKt4
+- **Section 7 Agent Skill End-to-End Demo (`playwright-ddt-multibrowser`):** https://youtu.be/MvKYDN8dp34

@@ -1,5 +1,11 @@
+[Public GitHub Repository]
+https://github.com/KozKhoa/TestingSoftware-HW04
+
+[GitHub Issues (BUG-01..BUG-10)]
+https://github.com/KozKhoa/TestingSoftware-HW04/issues
+
 [Task 2 Demo Video (>= 5 min, Vietnamese narration, Multi-Browser Playwright + Review Fix)]
-[LINK_PENDING] - Record using Section 1 of docs/video_scripts.md and paste YouTube Unlisted URL here.
+https://youtu.be/agS9QcfuKt4
 
 [Section 7 Agent Skill End-to-End Demo (playwright-ddt-multibrowser)]
-[LINK_PENDING] - Record using Section 2 of docs/video_scripts.md and paste YouTube Unlisted URL here.
+https://youtu.be/MvKYDN8dp34

@@ -522,19 +522,19 @@ npm install
 
 ---
 
-## [Entry - 2026-11-18 11:25:00] Triển khai Agent Skill playwright-ddt-multibrowser cho tính năng FR-02 Đăng nhập
+## [Entry - 2026-11-18 12:01:45] Bổ sung link GitHub Repo & Issues vào README, báo cáo, `youtube_list.txt`, xuất PDF và cập nhật Git
 
-- **Timestamp:** `2026-11-18 11:25:00`
+- **Timestamp:** `2026-11-18 12:01:45`
 - **User / Prompter:** `KozKhoa (@kozkhoa)`
-- **Tools:** `Antigravity (Gemini 3.8 Flash)`
-- **Description:** Triển khai Agent Skill `playwright-ddt-multibrowser` end-to-end cho tính năng FR-02 Đăng nhập & Khóa tài khoản (`Login.jsx`): tạo dataset ngoài `data/fr02-login.json` (18 test cases), sinh bộ test Playwright `tests/fr02-login.spec.ts` áp dụng 5 assertion patterns, rà soát Human Review phát hiện & bảo toàn nghiêm ngặt 7 lỗi SUT thực tế, nâng cấp `scripts/run-matrix.mjs` chạy matrix đa trình duyệt (Chromium, Firefox, WebKit), và xuất 4 HTML reports có đóng dấu banner `Run by: 23120285` và ISO-8601 timestamp (`reports/fr02-chromium`, `reports/fr02-firefox`, `reports/fr02-webkit`, `reports/fr02-all-browsers`).
+- **Tools:** `Antigravity AI Agent`, `Pandoc`, `Playwright Chromium`, `Git`
+- **Description:** Bổ sung liên kết clickable của GitHub repo & GitHub Issues (`#1`–`#10`) vào [README.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/README.md), [report.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/report.md), [bug_report.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/bug_report.md), [youtube_list.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/youtube_list.txt); khôi phục `reports/fr01-chromium` & `reports/all-browsers`; xuất lại toàn bộ `.pdf` bằng `export_pdfs.mjs`; commit, cập nhật `git_log.txt` và push lên `origin/main`.
 
 ### 1. Prompt (Nguyên văn)
 
 > [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
 
 ```text
-Hãy dùng skill /playwright-ddt-multibrowser  để tạo bộ test Playwright Data-Driven đa trình duyệt (Chromium, Firefox, WebKit) cho tính năng FR-02 Đăng nhập (eshop-sut/frontend-web/src/pages/Login.jsx), tách dữ liệu ra file JSON/CSV ngoài, dùng tối thiểu 3 assertion patterns và xuất HTML report có đóng dấu Run by: 23120285.
+Bổ sung link repo của bài tập này vào trong read me, báo các và link. Sau đó commit, push và update file git_log cho tôi đi
 ```
 
 ### 2. AI Response (Nguyên văn)
@@ -543,79 +543,23 @@ Hãy dùng skill /playwright-ddt-multibrowser  để tạo bộ test Playwright 
 > _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
 
 ````markdown
-Đã áp dụng trọn vẹn quy trình 5 Phase của Agent Skill **`playwright-ddt-multibrowser`** để xây dựng bộ test Data-Driven đa trình duyệt cho tính năng **FR-02 Đăng nhập & Khóa tài khoản** (`eshop-sut/frontend-web/src/pages/Login.jsx`).
+Tôi đã bổ sung đầy đủ link GitHub Repository & Issues, đồng bộ PDF, cập nhật `git_log.txt`, commit và push lên `origin/main`:
 
----
+1. **Bổ sung link GitHub Repo & Issues (`https://github.com/KozKhoa/TestingSoftware-HW04` & `.../issues`):**
+   - [README.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/README.md#L3-L5) (clickable Repository + GitHub Issues links).
+   - [report.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/report.md#L5-L6) (header + Mục 6 Demo Videos & Public GitHub Links).
+   - [bug_report.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/bug_report.md#L7-L8) (Public Repository + Issues `#1`–`#10`).
+   - [youtube_list.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/youtube_list.txt) (gồm cả link Public GitHub Repo, GitHub Issues và 2 link YouTube demo).
 
-### 1. Các thành phần đã tạo và cấu hình
+2. **Khôi phục Reports & Đồng bộ PDF:**
+   - Khôi phục `reports/fr01-chromium/` và `reports/all-browsers/` về bản `171` executions gốc (`git checkout -- reports/fr01-chromium reports/all-browsers`).
+   - Chạy `node scripts/export_pdfs.mjs` để render lại các file `.pdf` (`report.pdf`, `README.pdf`, `docs/bug_report.pdf`, `AI_LOG.pdf`, `AI_CRITIQUE.pdf`).
 
-1. **Dataset ngoài (External JSON Dataset):**
-   - File: [data/fr02-login.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr02-login.json)
-   - Chứa **18 test cases** phân nhóm: Positive (3 TCs), Negative (5 TCs), Edge & Lockout (2 TCs), UI & Security Compliance (8 TCs).
-   - Sử dụng token `{{UNIQUE}}` để cô lập dữ liệu người dùng (`login_user_{{UNIQUE}}@eshop.com`, `lockout_{{UNIQUE}}@eshop.com`) giữa các browser chạy đồng thời/tuần tự, tránh làm khóa tài khoản seed dùng chung.
-
-2. **Kịch bản kiểm thử Playwright Data-Driven:**
-   - File: [tests/fr02-login.spec.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/fr02-login.spec.ts)
-   - Helper đăng ký tài khoản API: [tests/helpers/eshop-api.ts](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/tests/helpers/eshop-api.ts#L18-L30) (`registerViaApi`).
-
-3. **Hỗ trợ chạy Matrix & Đóng dấu HTML Report:**
-   - File: [scripts/run-matrix.mjs](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/run-matrix.mjs#L13-L17) (bổ sung flag `--feature=fr02`).
-
----
-
-### 2. Tối thiểu 3 Assertion Patterns đã áp dụng (Thực tế áp dụng 5 patterns)
-
-1. **Navigation & URL Assertions:**
-   - `expect(page).toHaveURL(/\/(#.*)?$/)` (xác nhận chuyển hướng trang chủ `/` khi đăng nhập thành công).
-   - `expect(page).toHaveURL(/\/login$/)` (xác nhận giữ nguyên trang `/login` khi bị từ chối).
-2. **Content & Visibility Assertions:**
-   - `expect(page.locator('.bg-red-100')).toBeVisible()`.
-   - `expect(page.locator('.bg-red-100')).toContainText(/Đăng nhập thất bại/i)`.
-   - `expect(page.locator('header nav')).toBeVisible()`.
-3. **DOM Attributes, Geometry & CSS Styling Assertions:**
-   - `expect(emailInput).toHaveAttribute('type', 'email')`.
-   - `expect(passwordInput).toHaveAttribute('type', 'password')`.
-   - `expect(submitBtn).toHaveClass(/bg-blue-/)`.
-   - `expect(errBoxRect.y).toBeLessThan(btnRect.y)` (kiểm tra banner lỗi phải nằm **trên** nút bấm theo FR-22).
-4. **HTML5 Form Validation State Assertions:**
-   - `expect(await emailInput.evaluate((el: HTMLInputElement) => !el.checkValidity())).toBe(true)`.
-   - `expect(await passwordInput.evaluate((el: HTMLInputElement) => !el.checkValidity())).toBe(true)`.
-5. **Storage & Security Token Assertions:**
-   - `expect(await page.evaluate(() => localStorage.getItem('token'))).toBeTruthy()`.
-   - `expect(await page.evaluate(() => localStorage.getItem('token'))).toBeNull()`.
-
----
-
-### 3. Quy trình Human Adversarial Review & Bảo toàn lỗi SUT (Rule 4)
-
-Trong quá trình rà soát (Phase 4):
-- **Phát hiện lỗi kịch bản ban đầu:** Test case `TC-L04` và `TC-L11` đăng ký tài khoản mới bằng API với mật khẩu sai nên khi submit bị nhận diện thành đăng nhập thành công. Đã sửa trong [data/fr02-login.json](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/data/fr02-login.json) trường `registeredPassword: "CorrectPassword123!"` độc lập với `password` nhập vào form.
-- **Bảo toàn nghiêm ngặt 7 lỗi SUT thực tế (Strict Defect Preservation):**
-  1. `TC-L08`: SUT dùng `type="text"` cho input email nên không chặn được định dạng thiếu `@` bằng HTML5 native validation (vi phạm FR-02 & FR-22).
-  2. `TC-L12`: Tiêu đề form đăng nhập hiển thị sai là `<h2>Đăng Ký</h2>` thay vì `<h2>Đăng nhập</h2>` (vi phạm FR-21).
-  3. `TC-L13`: Nhãn các trường bắt buộc thiếu ký hiệu `*` (vi phạm FR-22).
-  4. `TC-L14`: Input Email mang thuộc tính `type="text"` thay vì `type="email"` (vi phạm FR-02 & FR-22).
-  5. `TC-L15`: Input Mật khẩu mang thuộc tính `type="text"` làm lộ mật khẩu plaintext (vi phạm nghiêm trọng FR-22 & SEC-01).
-  6. `TC-L16`: Nút submit hiển thị nhãn tiếng Anh `"Sign In"` thay vì tiếng Việt `"Đăng nhập"` (vi phạm FR-21).
-  7. `TC-L18`: Banner thông báo lỗi hiển thị **bên dưới** nút submit thay vì phía trên (vi phạm FR-22).
-
----
-
-### 4. Kết quả thực thi Ma trận Đa trình duyệt (Phase 5)
-
-Chạy lệnh: `node scripts/run-matrix.mjs --feature=fr02`
-
-| Browser | Số TC | Passed | Failed (Lỗi SUT) | Thời gian | HTML Report có đóng dấu |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **Chromium** | 18 | 11 | 7 | 22.2s | [reports/fr02-chromium/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr02-chromium/index.html) |
-| **Firefox** | 18 | 11 | 7 | 33.1s | [reports/fr02-firefox/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr02-firefox/index.html) |
-| **WebKit** | 18 | 11 | 7 | 26.5s | [reports/fr02-webkit/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr02-webkit/index.html) |
-| **Combined (All Browsers)** | **54** | **33** | **21** | **81.7s** | [reports/fr02-all-browsers/index.html](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/reports/fr02-all-browsers/index.html) |
-
-Mọi HTML report đều có banner nổi bật và tiêu đề `<title>` được đóng dấu:
-- **Run by:** `23120285`
-- **Timestamp:** Định dạng chuẩn ISO-8601 (ví dụ `2026-11-18T04:11:06.197Z`)
-- **Metadata Playwright:** ghi nhận `feature`, `browser`, `runBy` và `studentId`.
+3. **Commit, Update `git_log.txt` & Push:**
+   - `chore(setup): clean up temporary fr02 demo artifacts after video 2` — dọn dẹp file demo tạm `FR-02`.
+   - `docs(docs): add repo, issues, and demo video links across docs and export pdfs` — cập nhật toàn bộ tài liệu, `AI_LOG.md` và các file `.pdf`.
+   - `docs(docs): update git_log.txt with full commit history` — xuất lại [git_log.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/git_log.txt).
+   - Đã `git push origin main` thành công lên `git@github.com:KozKhoa/TestingSoftware-HW04.git`.
 ````
 
 ---

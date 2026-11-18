@@ -4,6 +4,7 @@
 - **Target System:** EShop SUT (`backend` `:3000`, `frontend-web` `:5173`, `frontend-admin` `:5174`)
 - **Automated Verification Date:** `2026-11-13T14:48:44.739Z`
 - **Browsers Verified:** Chromium, Firefox, WebKit (`reports/all-browsers/index.html`)
+- **Public Repository:** [https://github.com/KozKhoa/TestingSoftware-HW04](https://github.com/KozKhoa/TestingSoftware-HW04)
 - **GitHub Issue Automation:** `scripts/create_github_issues.py` — **10 live GitHub Issues posted** (`#1`–`#10`) on public repository [KozKhoa/TestingSoftware-HW04/issues](https://github.com/KozKhoa/TestingSoftware-HW04/issues)
 
 ---
