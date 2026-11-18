@@ -244,3 +244,52 @@ Tôi đã xử lý xong các commit và push lên `origin/main` (`git@github.com
 ````
 
 ---
+
+## [Entry - 2026-11-18 09:27:00] Chuyển GitHub repository sang Public và tạo 10 GitHub Issues (`BUG-01..BUG-10`)
+
+- **Timestamp:** `2026-11-18 09:27:00`
+- **User / Prompter:** `KozKhoa (@kozkhoa)`
+- **Tools:** `Antigravity AI Agent`, `GitHub CLI (gh)`, `Python 3`, `Git`
+- **Description:** Chuyển repository `KozKhoa/TestingSoftware-HW04` sang `PUBLIC` bằng `gh repo edit`, bổ sung fallback khi thiếu `python-dotenv` trong [create_github_issues.py](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/create_github_issues.py), tạo đủ 10 GitHub Issues (`#1`–`#10`), cập nhật liên kết trong [bug_report.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/bug_report.md) và [README.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/README.md), cập nhật [git_log.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/git_log.txt) và push lên `origin/main`.
+
+### 1. Prompt (Nguyên văn)
+
+> [!NOTE] Prompt gốc từ người dùng (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+
+```text
+Tôi có cái github cli rồi, tiến hành chuyển githbu sang public và tạo github issues cho tôi đi. 
+```
+
+### 2. AI Response (Nguyên văn)
+
+> [!NOTE] Phản hồi gốc từ AI (Không chỉnh sửa, không tóm tắt, giữ nguyên 100%)
+> _(Lưu ý: Bắt buộc bọc trong block 4 dấu backticks `markdown ... ` để bảo toàn định dạng Markdown và các code blocks bên trong mà không bị lỗi render)_
+
+````markdown
+Tôi đã chuyển repository sang **Public** và tạo đầy đủ **10 GitHub Issues** (`BUG-01..BUG-10`) cho bạn:
+
+1. **Chuyển repo sang Public:**
+   - Thực thi `gh repo edit KozKhoa/TestingSoftware-HW04 --visibility public --accept-visibility-change-consequences`.
+   - Đã kiểm tra công khai `https://api.github.com/repos/KozKhoa/TestingSoftware-HW04` trả về HTTP `200` (`visibility: PUBLIC`).
+
+2. **Tạo 10 GitHub Issues (`#1`–`#10`):**
+   - Trong [create_github_issues.py](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/scripts/create_github_issues.py) đã bổ sung fallback `try/except ImportError` cho `dotenv` để script chạy trực tiếp được với `GITHUB_TOKEN` từ `gh auth token` mà không cần cài thêm `python-dotenv`.
+   - Tất cả 10 issues đã được tạo kèm nhãn và ảnh screenshot chứng cứ tại [KozKhoa/TestingSoftware-HW04/issues](https://github.com/KozKhoa/TestingSoftware-HW04/issues):
+     - `BUG-01`: `#1` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/1`
+     - `BUG-02`: `#2` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/2`
+     - `BUG-03`: `#3` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/3`
+     - `BUG-04`: `#4` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/4`
+     - `BUG-05`: `#5` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/5`
+     - `BUG-06`: `#6` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/6`
+     - `BUG-07`: `#7` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/7`
+     - `BUG-08`: `#8` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/8`
+     - `BUG-09`: `#9` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/9`
+     - `BUG-10`: `#10` — `https://github.com/KozKhoa/TestingSoftware-HW04/issues/10`
+
+3. **Cập nhật tài liệu & Push lên `origin/main`:**
+   - Đã cập nhật link issues `#1`–`#10` vào [bug_report.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/bug_report.md), cập nhật trạng thái mục 4 lên `15%` trong [README.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/README.md), ghi nhận nhật ký vào [AI_LOG.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/AI_LOG.md), xuất lại [git_log.txt](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/git_log.txt) và push lên GitHub.
+
+**Việc còn lại duy nhất phía bạn:** quay 2 video YouTube Unlisted theo [video_scripts.md](file:///home/khoa/Documents/Four%20years/Ki%E1%BB%83m%20th%E1%BB%AD%20ph%E1%BA%A7n%20m%E1%BB%81m/Homeworks/HW04/docs/video_scripts.md), điền link vào `youtube_list.txt` & `README.md`, chạy `node scripts/export_pdfs.mjs` (sau khi cài `pandoc` + `npm install`) để đồng bộ `.pdf`, rồi nén file `.zip` nộp Moodle.
+````
+
+---
